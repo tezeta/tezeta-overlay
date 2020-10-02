@@ -5,8 +5,8 @@ EAPI=7
 
 inherit git-r3 meson xdg
 
-DESCRIPTION="A lightweight compositor for X11 (previously a compton fork)"
-HOMEPAGE="https://github.com/yshui/picom"
+DESCRIPTION="A lightweight compositor for X11 (previously a compton fork) (yet another fork)"
+HOMEPAGE="https://github.com/ibhagwan/picom"
 EGIT_REPO_URI="https://github.com/ibhagwan/picom.git"
 
 LICENSE="MPL-2.0 MIT"
