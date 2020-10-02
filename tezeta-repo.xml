@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>tezeta</name>
+		<description>tezeta's personal overlay</description>
+		<homepage>https://github.com/tezeta/tezeta-overlay</homepage>
+		<source type="git">git://github.com/tezeta/tezeta-repo.git</source>
+	</repo>
+</repositories>

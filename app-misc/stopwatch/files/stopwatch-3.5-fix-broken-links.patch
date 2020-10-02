@@ -1,0 +1,55 @@
+diff -Naur stopwatch-3.4.orig/README stopwatch-3.4/README
+--- stopwatch-3.4.orig/README	2014-10-28 02:35:34.537764827 +0100
++++ stopwatch-3.4/README	2014-10-28 02:42:49.724132568 +0100
+@@ -6,20 +6,20 @@
+ To Install
+ --------------------
+ 
+-See the install instructions at http://expect.nist.gov/stopwatch/#install
++See the install instructions at http://expect.sourceforge.net/stopwatch/#install
+ 
+ --------------------
+ To Use
+ --------------------
+ 
+-See the directions at http://expect.nist.gov/stopwatch/#directions
++See the directions at http://expect.sourceforge.net/stopwatch/#directions
+ 
+ --------------------
+ Systems Supported
+ --------------------
+ 
+ Stopwatch should work on any system that supports Tk 8.3 or later.
+-For earlier versions, see: http://expect.nist.gov/stopwatch
++For earlier versions, see: http://expect.sourceforge.net/stopwatch
+ 
+ --------------------
+ Author
+diff -Naur stopwatch-3.4.orig/index.html stopwatch-3.4/index.html
+--- stopwatch-3.4.orig/index.html	2014-10-28 02:35:34.537764827 +0100
++++ stopwatch-3.4/index.html	2014-10-28 02:42:07.587968055 +0100
+@@ -1,5 +1,5 @@
+ <TITLE>Stopwatch Home Page</TITLE>
+-<body bgcolor="#C0B090" background="http://expect.nist.gov/art/yellow-weave.gif">
++<body bgcolor="#C0B090" background="http://expect.sourceforge.net/art/yellow-weave.gif">
+ <h1>The Stopwatch Home Page</h1>
+ <h3>Description</h3>
+ 
+@@ -33,13 +33,13 @@
+ 
+ <table border=2>
+ <tr>
+-<td><a href="http://expect.nist.gov/stopwatch/stopwatch.tcl.html">source</a></td>
++<td><a href="http://expect.sourceforge.net/stopwatch/stopwatch.tcl.html">source</a></td>
+ <td>This single file is all you really need.</td>
+ <tr>
+-<td><a href="http://expect.nist.gov/stopwatch/stopwatch.tar.gz">complete distribution</a></td>
++<td><a href="http://expect.sourceforge.net/stopwatch/stopwatch.tar.gz">complete distribution</a></td>
+ <td>A full distribution for people who want the
+-<a href="http://expect.nist.gov/stopwatch/README">README</a>,
+-<a href="http://expect.nist.gov/stopwatch/HISTORY">HISTORY</a>,
++<a href="http://expect.sourceforge.net/stopwatch/README">README</a>,
++<a href="http://expect.sourceforge.net/stopwatch/HISTORY">HISTORY</a>,
+ and other unnecessary stuff.</td>
+ </tr>
+ </table>

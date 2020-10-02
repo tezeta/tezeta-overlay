@@ -1,0 +1,10 @@
+diff -Naur stopwatch-3.4.orig/stopwatch stopwatch-3.4/stopwatch
+--- stopwatch-3.4.orig/stopwatch	2014-10-28 02:35:34.537764827 +0100
++++ stopwatch-3.4/stopwatch	2014-10-28 02:35:44.391568945 +0100
+@@ -1,4 +1,4 @@
+-#!/depot/path/wish -f
++#!/usr/bin/wish -f
+ ######################################################################
+ # Name: Stopwatch
+ # Author: Don Libes <libes@nist.gov>
+
