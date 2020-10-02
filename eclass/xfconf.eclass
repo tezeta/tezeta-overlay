@@ -28,7 +28,7 @@ unset _xfconf_live
 inherit ${_xfconf_live} autotools eutils fdo-mime gnome2-utils libtool
 
 EGIT_BOOTSTRAP=autogen.sh
-EGIT_REPO_URI="git://git.xfce.org/xfce/${MY_PN:-${PN}}"
+EGIT_REPO_URI="https://git.xfce.org/xfce/${MY_PN:-${PN}}"
 
 _xfconf_deps=""
 _xfconf_m4=">=dev-util/xfce4-dev-tools-4.10"
