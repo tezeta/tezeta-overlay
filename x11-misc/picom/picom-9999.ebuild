@@ -8,6 +8,7 @@ inherit git-r3 meson xdg
 DESCRIPTION="A lightweight compositor for X11 (previously a compton fork) (yet another fork)"
 HOMEPAGE="https://github.com/ibhagwan/picom"
 EGIT_REPO_URI="https://github.com/ibhagwan/picom.git"
+EGIT_BRANCH="next"
 
 LICENSE="MPL-2.0 MIT"
 SLOT="0"
