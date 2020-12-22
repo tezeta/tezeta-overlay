@@ -2,7 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit multilib xfconf
 
 DESCRIPTION="a compatibility layer for running WindowMaker dockapps on Xfce4"
 HOMEPAGE="https://goodies.xfce.org/projects/panel-plugins/xfce4-wmdock-plugin"
