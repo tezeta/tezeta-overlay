@@ -165,7 +165,7 @@ NJS_MODULE_WD="${WORKDIR}/njs-${NJS_MODULE_PV}"
 HTTP_MPEG_TS_MODULE_PV="master"
 HTTP_MPEG_TS_MODULE_P="nginx-ts-module-${HTTP_MPEG_TS_MODULE_PV}"
 HTTP_MPEG_TS_MODULE_URI="https://github.com/arut/nginx-ts-module/archive/${HTTP_MPEG_TS_MODULE_PV}.tar.gz"
-HTTP_MPEG_TS_MODULE_WD="${WORKDIR}/nginx-ts-module--${HTTP_MPEG_TS_MODULE_PV}"
+HTTP_MPEG_TS_MODULE_WD="${WORKDIR}/nginx-ts-module-${HTTP_MPEG_TS_MODULE_PV}"
 
 # We handle deps below ourselves
 SSL_DEPS_SKIP=1
