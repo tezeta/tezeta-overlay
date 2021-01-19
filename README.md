@@ -9,7 +9,7 @@ layman -o https://raw.githubusercontent.com/tezeta/tezeta-repo/master/tezeta-rep
 
 ## What's inside:
 
- - gtk3 pystopwatch
+ - gtk3 pystopwatch (https://github.com/tezeta/pystopwatch)
  - nextcloud (git)
  - vendor-reset module (https://github.com/gnif/vendor-reset)
  - ampache (git)
