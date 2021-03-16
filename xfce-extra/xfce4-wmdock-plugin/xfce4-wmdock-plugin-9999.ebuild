@@ -16,7 +16,7 @@ IUSE=""
 
 RDEPEND="x11-libs/gtk+:3
 	x11-libs/libwnck:3
-	>=xfce-base/libxfce4ui4-4.14
+	>=xfce-base/libxfce4ui-4.14
 	>=xfce-base/libxfce4util-4.14
 	>=xfce-base/xfce4-panel-4.14
 	x11-libs/libX11"
