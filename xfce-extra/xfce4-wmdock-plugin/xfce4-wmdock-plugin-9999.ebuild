@@ -7,7 +7,7 @@ inherit autotools xdg-utils git-r3
 
 DESCRIPTION="a compatibility layer for running WindowMaker dockapps on Xfce4"
 HOMEPAGE="https://goodies.xfce.org/projects/panel-plugins/xfce4-wmdock-plugin"
-EGIT_REPO_URI="https://github.com/tezeta/xfce4-wmdock-plugin"
+EGIT_REPO_URI="https://github.com/maurerpe/xfce4-wmdock-plugin"
 
 LICENSE="GPL-2"
 SLOT="0"
