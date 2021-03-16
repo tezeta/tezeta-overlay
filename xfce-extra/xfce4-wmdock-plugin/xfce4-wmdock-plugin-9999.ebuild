@@ -30,7 +30,7 @@ src_configure() {
 
     local myconf=(
     	--prefix="${EPREFIX}/usr" \
-        --libexecdir="${EPREFIX}"/usr/$(get_libdir)
+        --libexecdir="${EPREFIX}"/usr/$(get_libdir) \
         --docdir="${EPREFIX}/usr/share/doc/${PF}"
 	)
 
