@@ -12,7 +12,6 @@ layman -o https://raw.githubusercontent.com/tezeta/tezeta-repo/master/tezeta-rep
  - gtk3 pystopwatch (https://github.com/tezeta/pystopwatch)
  - nextcloud (appimage, qtwebengine not required)
  - nextcloud (git)
- - vendor-reset module (https://github.com/gnif/vendor-reset)
  - ampache (git)
  - nginx with mpeg_ts module support
  - xfce4 wmdock plugin, both old and new GTK+3 port
