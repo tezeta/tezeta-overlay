@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit subversion xdg desktop cmake
+inherit subversion xdg desktop
 
 DESCRIPTION="a NeXT 68k workstation emulator"
 HOMEPAGE="http://previous.alternative-system.com/"
@@ -33,7 +33,23 @@ DOCS=()
 PATCHES=(
 	"${FILESDIR}"/previous-zlibfix.patch
 	"${FILESDIR}"/previous-romdefault.patch
+	"${FILESDIR}"/previous-cmakefix.patch
 )
+
+src_prepare() {
+	default
+}
+
+src_configure() {
+	if use debug; then
+		debugarg="--enable-debug"
+	fi
+
+	#todo: use CMake directly for build instead of configure script
+	./configure \
+		--prefix=/usr \
+		${debugarg}
+}
 
 src_install() {
 	dobin ./src/Previous

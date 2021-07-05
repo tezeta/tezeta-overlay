@@ -1,0 +1,11 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,7 @@
+ SET(APP_NAME "Previous")
+ 
+ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+-
++set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+ include(CheckIncludeFiles)
+ include(CheckFunctionExists)
+ include(CheckCCompilerFlag)
