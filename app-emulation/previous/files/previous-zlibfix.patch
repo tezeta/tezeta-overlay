@@ -1,0 +1,13 @@
+--- a/src/includes/unzip.h
++++ b/src/includes/unzip.h
+@@ -49,6 +49,10 @@
+ #ifndef _unz_H
+ #define _unz_H
+ 
++#ifndef OF
++#define OF(args) args
++#endif
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif

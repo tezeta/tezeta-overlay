@@ -15,4 +15,4 @@ layman -o https://raw.githubusercontent.com/tezeta/tezeta-repo/master/tezeta-rep
  - ampache (git)
  - nginx with mpeg_ts module support
  - xfce4 wmdock plugin, both old and new GTK+3 port
-
+ - Previous, a NeXT 68k hardware emulator (http://previous.alternative-system.com)
