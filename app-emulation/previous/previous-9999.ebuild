@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit flag-o-matic subversion xdg desktop
+inherit subversion xdg desktop
 
 DESCRIPTION="a NeXT 68k workstation emulator"
 HOMEPAGE="http://previous.alternative-system.com/"
@@ -32,7 +32,8 @@ DOCS=()
 
 PATCHES=(
 	"${FILESDIR}"/previous-zlibfix.patch
-	"${FILESDIR}"/previous-remove-icon.patch
+	"${FILESDIR}"/previous-romdefault.patch
+	"${FILESDIR}"/previous-cmakefix.patch
 )
 
 src_prepare() {
@@ -51,12 +52,19 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="$D" install
+	#emake DESTDIR="$D" install
+	dobin ./src/Previous
+
+	insinto /usr/share/previous
+	doins ./src/ND_step1_v43_eeprom.bin
+	doins ./src/Rev_1.0_v41.BIN
+	doins ./src/Rev_2.5_v66.BIN
+	doins ./src/Rev_3.3_v74.BIN
 
 	dodoc readme.previous.txt networking.howto.txt filesharing.howto.txt
 
 	unzip -q "${FILESDIR}"/PReV-icons-WOshad.zip
-	cd HighResOSX-WOshadow.iconset
+	cd ./HighResOSX-WOshadow.iconset
 
 	newicon -s 16 icon_16x16.png previous-app.png
 	newicon -s 32 icon_32x32.png previous-app.png

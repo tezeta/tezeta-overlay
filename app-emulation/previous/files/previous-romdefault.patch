@@ -1,0 +1,27 @@
+--- a/src/configuration.c
++++ b/src/configuration.c
+@@ -451,12 +451,9 @@
+ 	ConfigureParams.Sound.bEnableSound = true;
+ 
+ 	/* Set defaults for Rom */
+-    sprintf(ConfigureParams.Rom.szRom030FileName, "%s%cRev_1.0_v41.BIN",
+-            Paths_GetWorkingDir(), PATHSEP);
+-    sprintf(ConfigureParams.Rom.szRom040FileName, "%s%cRev_2.5_v66.BIN",
+-            Paths_GetWorkingDir(), PATHSEP);
+-    sprintf(ConfigureParams.Rom.szRomTurboFileName, "%s%cRev_3.3_v74.BIN",
+-            Paths_GetWorkingDir(), PATHSEP);
++    sprintf(ConfigureParams.Rom.szRom030FileName, "/usr/share/previous/Rev_1.0_v41.BIN");
++    sprintf(ConfigureParams.Rom.szRom040FileName, "/usr/share/previous/Rev_2.5_v66.BIN");
++    sprintf(ConfigureParams.Rom.szRomTurboFileName, "/usr/share/previous/Rev_3.3_v74.BIN");
+     
+     ConfigureParams.Rom.bUseCustomMac = false;
+     memset(ConfigureParams.Rom.nRomCustomMac, 0,
+@@ -492,7 +489,7 @@
+         ConfigureParams.Dimension.board[i].nMemoryBankSize[1] = 4;
+         ConfigureParams.Dimension.board[i].nMemoryBankSize[2] = 4;
+         ConfigureParams.Dimension.board[i].nMemoryBankSize[3] = 4;
+-        sprintf(ConfigureParams.Dimension.board[i].szRomFileName, "%s%cdimension_eeprom.bin",
++        sprintf(ConfigureParams.Dimension.board[i].szRomFileName, "/usr/share/previous/dimension_eeprom.bin",
+                 Paths_GetWorkingDir(), PATHSEP);
+     }
+ 
