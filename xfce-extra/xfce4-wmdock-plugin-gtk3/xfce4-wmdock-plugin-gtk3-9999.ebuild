@@ -6,7 +6,7 @@ EAPI=7
 inherit autotools xdg-utils git-r3
 
 DESCRIPTION="a compatibility layer for running WindowMaker dockapps on Xfce4"
-HOMEPAGE="https://goodies.xfce.org/projects/panel-plugins/xfce4-wmdock-plugin"
+HOMEPAGE="https://github.com/maurerpe/xfce4-wmdock-plugin"
 EGIT_REPO_URI="https://github.com/maurerpe/xfce4-wmdock-plugin"
 
 LICENSE="GPL-2"
@@ -28,24 +28,24 @@ DEPEND="${RDEPEND}
 src_configure() {
 	./autogen.sh || die "autogen failed"
 
-    local myconf=(
-    	--prefix="${EPREFIX}/usr" \
-        --libexecdir="${EPREFIX}"/usr/$(get_libdir) \
-        --docdir="${EPREFIX}/usr/share/doc/${PF}"
+	local myconf=(
+		--prefix="${EPREFIX}/usr" \
+		--libexecdir="${EPREFIX}"/usr/$(get_libdir) \
+		--docdir="${EPREFIX}/usr/share/doc/${PF}"
 	)
 
-    econf "${myconf[@]}" || die
+	econf "${myconf[@]}" || die
 }
 
 src_install() {
-    default
-    find "${D}" -name '*.la' -delete || die
+	default
+	find "${D}" -name '*.la' -delete || die
 }
 
 pkg_postinst() {
-    xdg_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-    xdg_icon_cache_update
+	xdg_icon_cache_update
 }
