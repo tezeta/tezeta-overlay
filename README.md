@@ -6,6 +6,7 @@ Tezeta's personal Gentoo overlay
 Add via eselect-repository:
 ```
 eselect repository enable tezeta
+emaint sync -r tezeta
 ```
 
 Add via layman:
