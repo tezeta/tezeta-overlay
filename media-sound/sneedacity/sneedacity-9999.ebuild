@@ -58,7 +58,7 @@ BDEPEND="app-arch/unzip
 REQUIRED_USE="portmidi? ( portsmf )"
 
 PATCHES=(
-#   	"${FILESDIR}/${P}-disable-ccache.patch"
+   	"${FILESDIR}/${P}-disable-ccache.patch"
 	"${FILESDIR}/${P}-fix-vertical-track-resizing.patch"
 	"${FILESDIR}/${P}-fix-gettimeofday.patch"
 	"${FILESDIR}/${P}-add-missing-include-portaudio.patch"
