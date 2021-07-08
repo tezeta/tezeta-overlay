@@ -1,10 +1,10 @@
-# tezeta-repo
+# tezeta-overlay
 
 Tezeta's personal Gentoo overlay
 
 To add via layman:
 ```
-layman -o https://raw.githubusercontent.com/tezeta/tezeta-repo/master/tezeta-repo.xml -f -a tezeta
+layman -o https://raw.githubusercontent.com/tezeta/tezeta-overlay/master/tezeta-overlay.xml -f -a tezeta
 ```
 
 ## What's inside:
