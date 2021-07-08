@@ -3,11 +3,11 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6,7,8,9,10} )
 
 inherit python-single-r1 git-r3
 
-DESCRIPTION="clock and two countdown functions that can minimize to the tray"
+DESCRIPTION="a simple alarm/stopwatch/timer that can minimize to the tray"
 HOMEPAGE="https://github.com/tezeta/pystopwatch"
 EGIT_REPO_URI="https://github.com/tezeta/pystopwatch.git"
 
