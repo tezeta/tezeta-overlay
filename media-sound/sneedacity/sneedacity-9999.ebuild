@@ -62,6 +62,7 @@ PATCHES=(
 	"${FILESDIR}/${P}-fix-vertical-track-resizing.patch"
 	"${FILESDIR}/${P}-fix-gettimeofday.patch"
 	"${FILESDIR}/${P}-add-missing-include-portaudio.patch"
+	"${FILESDIR}/${P}-add-lockable-elements.patch"
 )
 
 src_prepare() {
