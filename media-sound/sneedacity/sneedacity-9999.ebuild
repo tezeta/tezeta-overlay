@@ -2,7 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-WX_GTK_VER="3.0-gtk3"
+#note: sneedacity claims to depend on 3.1-gtk3, but compiling with system wxwidgets is broken currently.
+#Only works with pg_overlay's wxGTK (not included)
+WX_GTK_VER="3.1-gtk3"
 
 inherit cmake flag-o-matic wxwidgets xdg git-r3
 
@@ -14,8 +16,8 @@ CMAKE_BUILD_TYPE="Release"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~mips ppc ppc64 x86"
-IUSE="alsa doc ffmpeg +flac id3tag jack +ladspa +lv2 mad ogg oss
-	+portmidi +portmixer +portsmf sbsms twolame vamp +vorbis +vst"
+IUSE="alsa doc ffmpeg +flac id3tag jack +ladspa +lv2 mad ogg oss +portmixer
+	sbsms system-portmidi system-wxwidgets twolame vamp +vorbis +vst"
 
 RESTRICT="test network-sandbox"
 
@@ -25,6 +27,7 @@ RDEPEND="dev-libs/expat
 	media-libs/portaudio[alsa?]
 	media-libs/soxr
 	>=media-sound/lame-3.100-r3
+	system-wxwidgets? ( x11-libs/wxGTK:3.1-gtk3[X] )
 	alsa? ( media-libs/alsa-lib )
 	ffmpeg? ( media-video/ffmpeg:= )
 	flac? ( media-libs/flac[cxx] )
@@ -40,13 +43,12 @@ RDEPEND="dev-libs/expat
 	)
 	mad? ( >=media-libs/libmad-0.15.1b )
 	ogg? ( media-libs/libogg )
-	portmidi? ( media-libs/portmidi )
+	system-portmidi? ( media-libs/portmidi )
 	sbsms? ( media-libs/libsbsms )
 	twolame? ( media-sound/twolame )
 	vamp? ( media-libs/vamp-plugin-sdk )
 	vorbis? ( media-libs/libvorbis )
 "
-#system-wxwidgets? ( x11-libs/wxGTK:3.1-gtk3[X] )
 
 DEPEND="${RDEPEND}"
 BDEPEND="app-arch/unzip
@@ -54,8 +56,6 @@ BDEPEND="app-arch/unzip
 	virtual/pkgconfig
 	dev-util/conan
 "
-
-REQUIRED_USE="portmidi? ( portsmf )"
 
 PATCHES=(
    	"${FILESDIR}/${P}-disable-ccache.patch"
@@ -67,14 +67,19 @@ PATCHES=(
 src_prepare() {
 	cmake_src_prepare
 
-	if ! use portmidi; then
-		sed -i -e 's/^ *MIDI_OUT//g' src/Experimental.cmake || die
-		sed -i -e 's/^ *NOTETRACK_OVERLAY//g' src/Experimental.cmake || die
-	fi
+	#MIDI_OUT depends on midi
+#	if ! use midi; then
+#		sed -i -e 's/^ *MIDI_OUT//g' src/Experimental.cmake || die
+#	fi
 }
 
 src_configure() {
-#	use system-wxwidgets || setup-wxwidgets
+	#todo: fix issues finding system wxwidgets with conan
+	if use system-wxwidgets; then
+		die "Building Sneedacity with system wxwidgets is currently broken, please remove the system-wxwidgets flag and try again."
+	fi
+	#use system-wxwidgets || setup-wxwidgets
+
 	append-cxxflags -std=gnu++14
 
 	# * always use system libraries if possible
@@ -90,7 +95,8 @@ src_configure() {
 		-Dsneedacity_use_lame=system
 		-Dsneedacity_use_lv2=$(usex lv2 system off)
 		-Dsneedacity_use_mad=$(usex mad system off)
-		-Dsneedacity_use_midi=$(usex portmidi system off)
+		#fails to compile without midi, see https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255186
+		-Dsneedacity_use_midi=$(usex system-portmidi system local)
 		-Dsneedacity_use_nyquist=local
 		-Dsneedacity_use_ogg=$(usex ogg system off)
 		-Dsneedacity_use_pa_alsa=$(usex alsa)
@@ -99,7 +105,7 @@ src_configure() {
 		#-Dsneedacity_use_pch leaving it to the default behavior
 		-Dsneedacity_use_portaudio=local # only 'local' option is present
 		-Dsneedacity_use_portmixer=$(usex portmixer local off)
-		-Dsneedacity_use_portsmf=$(usex portsmf local off)
+		-Dsneedacity_use_portsmf=local
 		-Dsneedacity_use_sbsms=$(usex sbsms local off) # no 'system' option in configuration?
 		-Dsneedacity_use_sndfile=system
 		-Dsneedacity_use_soundtouch=system
@@ -108,10 +114,7 @@ src_configure() {
 		-Dsneedacity_use_vamp=$(usex vamp system off)
 		-Dsneedacity_use_vorbis=$(usex vorbis system off)
 		-Dsneedacity_use_vst=$(usex vst)
-		#todo: fix issues finding system wxwidgets with conan
-		#for now local is forced
-		#-Dsneedacity_use_wxwidgets=$(usex system-wxwidgets system local)
-		-Dsneedacity_use_wxwidgets=local
+		-Dsneedacity_use_wxwidgets=$(usex system-wxwidgets system local)
 	)
 
 	cmake_src_configure
