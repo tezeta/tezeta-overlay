@@ -6,12 +6,22 @@ EAPI=7
 #Only works with pg_overlay's wxGTK (not included)
 WX_GTK_VER="3.1-gtk3"
 
-inherit cmake flag-o-matic wxwidgets xdg git-r3
+inherit cmake flag-o-matic wxwidgets xdg
 
 DESCRIPTION="Free crossplatform audio editor (formerly Audacity)"
 HOMEPAGE="https://github.com/Sneeds-Feed-and-Seed/sneedacity"
-EGIT_REPO_URI="https://github.com/Sneeds-Feed-and-Seed/sneedacity.git"
-CMAKE_BUILD_TYPE="Release"
+
+if [[ "${PV}" != 9999 ]] ; then
+	SRC_URI="https://github.com/Sneeds-Feed-and-Seed/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
+			$SRC_URI"
+	S="${WORKDIR}/${P}"
+    KEYWORDS="amd64 ~arm64 ~mips ppc ppc64 x86"
+else
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Sneeds-Feed-and-Seed/${PN}"
+	EGIT_BRANCH="conan_removal"
+	CMAKE_BUILD_TYPE="Release"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -58,7 +68,7 @@ BDEPEND="app-arch/unzip
 "
 
 PATCHES=(
-   	"${FILESDIR}/${P}-disable-ccache.patch"
+   	#"${FILESDIR}/${P}-disable-ccache.patch"
 	"${FILESDIR}/${P}-fix-vertical-track-resizing.patch"
 	"${FILESDIR}/${P}-fix-gettimeofday.patch"
 	"${FILESDIR}/${P}-add-missing-include-portaudio.patch"
