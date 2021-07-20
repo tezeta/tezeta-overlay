@@ -13,13 +13,13 @@ KEYWORDS="amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+		!!net-misc/nextcloud-client"
 
 RESTRICT="binchecks strip"
 
 S="${WORKDIR}"
 
 src_install() {
-  cp ${DISTDIR}/Nextcloud-${PV}-x86_64.AppImage nextcloud-desktop
-  dobin nextcloud-desktop
+	newbin ${DISTDIR}/Nextcloud-${PV}-x86_64.AppImage nextcloud
 }
