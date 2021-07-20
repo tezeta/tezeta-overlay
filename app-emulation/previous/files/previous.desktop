@@ -3,5 +3,5 @@ Name=Previous
 Comment=NeXT 68k workstation emulator
 Type=Application
 Categories=System
-Exec=/usr/bin/Previous
+Exec=/usr/bin/previous
 Icon=previous-app

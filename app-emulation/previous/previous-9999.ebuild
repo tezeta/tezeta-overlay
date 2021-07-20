@@ -52,7 +52,7 @@ src_configure() {
 }
 
 src_install() {
-	dobin ./src/Previous
+	newbin ./src/Previous previous
 
 	insinto /usr/share/previous
 	doins ./src/ND_step1_v43_eeprom.bin
