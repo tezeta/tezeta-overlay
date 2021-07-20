@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/radareorg/iaito"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="

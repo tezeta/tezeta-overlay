@@ -15,7 +15,7 @@ if [[ "${PV}" != 9999 ]] ; then
 	SRC_URI="https://github.com/Sneeds-Feed-and-Seed/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
 			$SRC_URI"
 	S="${WORKDIR}/${P}"
-    KEYWORDS="amd64 ~arm64 ~mips ppc ppc64 x86"
+    KEYWORDS="~amd64 ~arm64 ~mips ~ppc ~ppc64 ~x86"
 else
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Sneeds-Feed-and-Seed/${PN}"

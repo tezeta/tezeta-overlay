@@ -12,7 +12,7 @@ SRC_URI="http://expect.sourceforge.net/$PN/$PN.tar.gz"
 
 LICENSE="public-domain"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="
