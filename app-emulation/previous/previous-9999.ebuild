@@ -13,7 +13,7 @@ ESVN_PROJECT=Previous
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64"
 IUSE="debug +print pcap"
 
 DEPEND="media-libs/libsdl2[X,opengl,sound,video]
