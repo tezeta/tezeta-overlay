@@ -30,6 +30,7 @@ sync-uri = https://github.com/tezeta/tezeta-overlay.git
  - nginx with mpeg_ts module support
  - xfce4 wmdock plugin, both old and new GTK+3 port
  - kvpm 0.9.10-r1
+ - memtest86+ 5.31b
  - funiq, fuzzy unique (https://github.com/mjfisheruk/funiq)
  - lockstate, a tray keylock status indicator (https://oldforum.puppylinux.com/viewtopic.php?t=110710)
  - Previous, a NeXT 68k hardware emulator (http://previous.alternative-system.com)
