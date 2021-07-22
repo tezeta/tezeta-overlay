@@ -1,25 +1,24 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-#note: sneedacity claims to depend on 3.1-gtk3, but compiling with system wxwidgets is broken currently.
+#note: tenacity claims to depend on 3.1-gtk3, but compiling with system wxwidgets is broken currently.
 #Only works with pg_overlay's wxGTK (not included)
 WX_GTK_VER="3.1-gtk3"
 
 inherit cmake flag-o-matic wxwidgets xdg
 
-DESCRIPTION="Free crossplatform audio editor (formerly Audacity)"
-HOMEPAGE="https://github.com/Sneeds-Feed-and-Seed/sneedacity"
+DESCRIPTION="an easy-to-use multi-track audio editor and recorder, forked from Audacity"
+HOMEPAGE="https://github.com/tenacityteam/tenacity"
 
 if [[ "${PV}" != 9999 ]] ; then
-	SRC_URI="https://github.com/Sneeds-Feed-and-Seed/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
+	SRC_URI="https://github.com/tenacityteam/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
 			$SRC_URI"
 	S="${WORKDIR}/${P}"
     KEYWORDS="~amd64 ~arm64 ~mips ~ppc ~ppc64 ~x86"
 else
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/Sneeds-Feed-and-Seed/${PN}"
-	EGIT_BRANCH="conan_removal"
+	EGIT_REPO_URI="https://github.com/tenacityteam/${PN}"
 	CMAKE_BUILD_TYPE="Release"
 fi
 
@@ -72,7 +71,7 @@ PATCHES=(
 	"${FILESDIR}/${P}-fix-vertical-track-resizing.patch"
 	"${FILESDIR}/${P}-fix-gettimeofday.patch"
 	"${FILESDIR}/${P}-add-missing-include-portaudio.patch"
-	"${FILESDIR}/${P}-add-lockable-elements.patch"
+	"${FILESDIR}/${P}-about-dialog-fix-flag-checks.patch"
 )
 
 src_prepare() {
@@ -87,7 +86,7 @@ src_prepare() {
 src_configure() {
 	#todo: fix issues finding system wxwidgets with conan
 	if use system-wxwidgets; then
-		die "Building Sneedacity with system wxwidgets is currently broken, please remove the system-wxwidgets flag and try again."
+		die "Building Tenacity with system wxwidgets is currently broken, please remove the system-wxwidgets flag and try again."
 	fi
 	#use system-wxwidgets || setup-wxwidgets
 
@@ -97,35 +96,35 @@ src_configure() {
 	# * options listed in the order that cmake-gui lists them
 	local mycmakeargs=(
 #		--disable-dynamic-loading
-		-Dsneedacity_lib_preference=system
-		-Dsneedacity_use_expat=system
-		-Dsneedacity_use_ffmpeg=$(usex ffmpeg loaded off)
-		-Dsneedacity_use_flac=$(usex flac system off)
-		-Dsneedacity_use_id3tag=$(usex id3tag system off)
-		-Dsneedacity_use_ladspa=$(usex ladspa)
-		-Dsneedacity_use_lame=system
-		-Dsneedacity_use_lv2=$(usex lv2 system off)
-		-Dsneedacity_use_libmad=$(usex mad system off)
+		-Dlib_preference=system
+		-Duse_expat=system
+		-Duse_ffmpeg=$(usex ffmpeg loaded off)
+		-Duse_flac=$(usex flac system off)
+		-Duse_id3tag=$(usex id3tag system off)
+		-Duse_ladspa=$(usex ladspa)
+		-Duse_lame=system
+		-Duse_lv2=$(usex lv2 system off)
 		#fails to compile without midi, see https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255186
-		-Dsneedacity_use_midi=$(usex system-portmidi system local)
-		-Dsneedacity_use_nyquist=local
-		-Dsneedacity_use_ogg=$(usex ogg system off)
-		-Dsneedacity_use_pa_alsa=$(usex alsa)
-		-Dsneedacity_use_pa_jack=$(usex jack linked off)
-		-Dsneedacity_use_pa_oss=$(usex oss)
-		#-Dsneedacity_use_pch leaving it to the default behavior
-		-Dsneedacity_use_portaudio=local # only 'local' option is present
-		-Dsneedacity_use_portmixer=$(usex portmixer local off)
-		-Dsneedacity_use_portsmf=local
-		-Dsneedacity_use_sbsms=$(usex sbsms local off) # no 'system' option in configuration?
-		-Dsneedacity_use_sndfile=system
-		-Dsneedacity_use_soundtouch=system
-		-Dsneedacity_use_soxr=system
-		-Dsneedacity_use_twolame=$(usex twolame system off)
-		-Dsneedacity_use_vamp=$(usex vamp system off)
-		-Dsneedacity_use_vorbis=$(usex vorbis system off)
-		-Dsneedacity_use_vst=$(usex vst)
-		-Dsneedacity_use_wxwidgets=$(usex system-wxwidgets system local)
+		-Duse_libmad=$(usex mad system off)
+		-Duse_midi=$(usex system-portmidi system local)
+		-Duse_nyquist=local
+		-Duse_ogg=$(usex ogg system off)
+		-Duse_pa_alsa=$(usex alsa)
+		-Duse_pa_jack=$(usex jack linked off)
+		-Duse_pa_oss=$(usex oss)
+		#-Duse_pch leaving it to the default behavior
+		-Duse_portaudio=local # only 'local' option is present
+		-Duse_portmixer=$(usex portmixer local off)
+		-Duse_portsmf=local
+		-Duse_sbsms=$(usex sbsms local off) # no 'system' option in configuration?
+		-Duse_sndfile=system
+		-Duse_soundtouch=system
+		-Duse_soxr=system
+		-Duse_twolame=$(usex twolame system off)
+		-Duse_vamp=$(usex vamp system off)
+		-Duse_vorbis=$(usex vorbis system off)
+		-Duse_vst=$(usex vst)
+		-Duse_wxwidgets=$(usex system-wxwidgets system local)
 	)
 
 	cmake_src_configure
