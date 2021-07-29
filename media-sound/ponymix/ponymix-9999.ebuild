@@ -31,7 +31,7 @@ src_install() {
 		newins bash-completion ponymix
 	fi
 
-	if use bash-completions; then
+	if use zsh-completions; then
 		insinto /usr/share/zsh/site-functions 
 		newins zsh-completion _ponymix
 	fi
