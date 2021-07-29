@@ -35,6 +35,7 @@ sync-uri = https://github.com/tezeta/tezeta-overlay.git
  - memtest86+ 5.31b
  - Renesas uPD72020x firmware v2.0.2.6
  - funiq, fuzzy unique (https://github.com/mjfisheruk/funiq)
+ - ponymix, a CLI volume control for PulseAudio (https://github.com/falconindy/ponymix)
  - lockstate, a tray keylock status indicator (https://oldforum.puppylinux.com/viewtopic.php?t=110710)
  - Previous, a NeXT 68k hardware emulator (http://previous.alternative-system.com)
  - [Tenacity](https://github.com/tenacityteam/tenacity) and [Sneedacity](https://github.com/Sneeds-Feed-and-Seed/sneedacity), Audacity forks free from telemetry
