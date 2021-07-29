@@ -30,6 +30,7 @@ sync-uri = https://github.com/tezeta/tezeta-overlay.git
  - ampache (git)
  - nginx with mpeg_ts module support
  - xfce4 wmdock plugin, both old and new GTK+3 port
+ - various WindowMaker dockapps
  - kvpm 0.9.10-r1
  - memtest86+ 5.31b
  - Renesas uPD72020x firmware v2.0.2.6
