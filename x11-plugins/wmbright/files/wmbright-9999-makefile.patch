@@ -1,0 +1,18 @@
+diff -Naur wmbright-9999-orig/Makefile wmbright-9999/Makefile
+--- wmbright-9999-orig/Makefile	2021-07-29 17:41:34.233943423 -0400
++++ wmbright-9999/Makefile	2021-07-29 17:42:53.087940081 -0400
+@@ -1,12 +1,12 @@
+ CC		= gcc
+ CFLAGS		= -std=gnu99 -O3 -W -Wall `pkg-config --cflags xrandr`
+ CFLAGS		= -std=gnu99 -g3 -W -Wall `pkg-config --cflags xrandr`
+-LDFLAGS		= -L/usr/X11R6/lib
++LDFLAGS		= -L/usr/lib
+ LIBS		= -lXpm -lXext -lX11 -lm `pkg-config --libs xrandr` -lpthread
+ OBJECTS		= misc.o config.o brightness.o ui_x.o mmkeys.o wmbright.o
+ 
+ # where to install this program (also for packaging stuff)
+-PREFIX		= /usr/local
++PREFIX		= /usr
+ INSTALL_BIN	= -m 755
+ INSTALL_DATA	= -m 644
+ 

@@ -14,7 +14,7 @@ KEYWORDS="amd64 x86"
 S="${WORKDIR}/uPD72020x-Firmware-${PV}/"
 
 src_install() {
-	mv 'UPDATE.mem 2.0.2.6' renesas_usb_fw.mem
+	mv 'UPDATE.mem' renesas_usb_fw.mem
 	insinto /lib/firmware
 	doins renesas_usb_fw.mem
 
