@@ -21,7 +21,3 @@ location = /var/db/repos/tezeta
 sync-type = git
 sync-uri = https://github.com/tezeta/tezeta-overlay.git
 ```
-
-## What's inside:
-
-See https://gpo.zugaina.org/Overlays/tezeta
