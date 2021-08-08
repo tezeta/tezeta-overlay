@@ -24,4 +24,4 @@ sync-uri = https://github.com/tezeta/tezeta-overlay.git
 
 ## What's inside:
 
-Too much to list. See (https://gpo.zugaina.org/Overlays/tezeta)
+See https://gpo.zugaina.org/Overlays/tezeta
