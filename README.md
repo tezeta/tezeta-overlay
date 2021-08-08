@@ -34,6 +34,7 @@ sync-uri = https://github.com/tezeta/tezeta-overlay.git
  - kvpm 0.9.10-r1
  - memtest86+ 5.31b
  - Renesas uPD72020x firmware v2.0.2.6
+ - me_cleaner (https://github.com/corna/me_cleaner)
  - funiq, fuzzy unique (https://github.com/mjfisheruk/funiq)
  - ponymix, a CLI volume control for PulseAudio (https://github.com/falconindy/ponymix)
  - lockstate, a tray keylock status indicator (https://oldforum.puppylinux.com/viewtopic.php?t=110710)
