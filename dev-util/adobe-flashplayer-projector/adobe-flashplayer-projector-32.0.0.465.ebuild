@@ -4,8 +4,8 @@
 
 EAPI=7
 
-DESCRIPTION="Standlone Adobe Flash Player"
-HOMEPAGE="http://www.adobe.com/support/flashplayer/downloads.html"
+DESCRIPTION="Adobe Flash Player standalone projector"
+HOMEPAGE="https://www.adobe.com/support/flashplayer/debug_downloads.html"
 
 SRC_URI="https://fpdownload.macromedia.com/pub/flashplayer/updaters/32/flash_player_sa_linux.x86_64.tar.gz
 		debugger? ( https://fpdownload.macromedia.com/pub/flashplayer/updaters/32/flash_player_sa_linux_debug.x86_64.tar.gz )"
@@ -17,7 +17,7 @@ IUSE="debugger"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-		x11-libs/gtk+"
+		x11-libs/gtk+:2"
 
 S="${WORKDIR}"
 
