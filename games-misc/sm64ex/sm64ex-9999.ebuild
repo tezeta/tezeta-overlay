@@ -4,7 +4,7 @@
 
 EAPI=7
 
-inherit eutils git-r3
+inherit desktop eutils git-r3 xdg
 
 DESCRIPTION="Super Mario 64 PC port with additional features"
 HOMEPAGE="https://github.com/sm64pc/sm64ex"
@@ -57,8 +57,20 @@ src_install() {
 	doins -r ./build/${ROM_VER}_pc/*
 
 	fperms +x /usr/share/${PN}/sm64.${ROM_VER}.f3dex2e
-	dosym /usr/share/${PN}/sm64.${ROM_VER}.f3dex2e /usr/bin/sm64
+	dosym /usr/share/${PN}/sm64.${ROM_VER}.f3dex2e /usr/bin/sm64ex
 
 	dodoc "README.md"
+
+	doicon -s scalable ${FILESDIR}/sm64ex.svg
+	domenu ${FILESDIR}/sm64ex.desktop
 }
 
+pkg_postrm() {
+	xdg_icon_cache_update
+	xdg_desktop_database_update
+}
+
+pkg_postinst() {
+	xdg_icon_cache_update
+	xdg_desktop_database_update
+}
