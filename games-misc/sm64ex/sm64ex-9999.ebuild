@@ -14,7 +14,7 @@ EGIT_BRANCH="nightly"
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+60fps +baserom-us baserom-eu baserom-jp debug +bettercamera nodrawdistance texturefix +optionsmenu +textsaves abi_x86_64 abi_x86_32"
+IUSE="+60fps +baserom-us baserom-eu baserom-jp debug +bettercamera extdata nodrawdistance +optionsmenu textsaves texturefix abi_x86_64 abi_x86_32"
 REQUIRED_USE="^^ ( baserom-us baserom-eu baserom-jp ) || ( abi_x86_64 abi_x86_32 )"
 
 DEPEND=">=dev-lang/python-3.6
@@ -48,7 +48,8 @@ src_compile() {
 		NODRAWINGDISTANCE=$(usex nodrawdistance 1 0) \
 		TEXTURE_FIX=$(usex texturefix 1 0) \
 		EXT_OPTIONS_MENU=$(usex optionsmenu 1 0) \
-		EXTERNAL_DATA=$(usex textsaves 1 0) \
+		EXTERNAL_DATA=$(usex extdata 1 0) \
+		TEXTSAVES=$(usex textsaves 1 0) \
 		|| die "Error: emake failed!"
 }
 
