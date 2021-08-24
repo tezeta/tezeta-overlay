@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM 'http://www.gentoo.org/dtd/metadata.dtd'>
+<pkgmetadata>
+	<maintainer type="person">
+		<email>25644493+tezeta@users.noreply.github.com</email>
+		<name>tezeta</name>
+	</maintainer>
+	<longdescription>Minimal GUI for writing compressed disk images to USB drives</longdescription>
+</pkgmetadata>
