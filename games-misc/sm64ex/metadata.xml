@@ -13,6 +13,8 @@
 		<flag name="baserom-jp">Build using the JP ROM (baserom.jp.z64)</flag>
 		<flag name="bettercamera">Build with analog camera support.</flag>
 		<flag name="debug">Build with debugging symbols.</flag>
+		<flag name="extdata">Load textures and soundbanks from external files. Allows you to use texture packs. The default data is copied to a res folder next to the produced executable. For this install, this will be placed in /usr/share/sm64ex</flag>
+		<flag name="nodrawdistance">Build with disabled draw distance (every object is active at all times). May affect gameplay.</flag>
 		<flag name="optionsmenu">Enable the Options menu. Accessed with R on Pause menu.</flag>
 		<flag name="textsaves">Use INI-based save format instead of the usual binary EEPROM dumps.</flag>
 		<flag name="texturefix">Enable various texture-related bugfixes (e.g. fixes the smoke texture).</flag>
