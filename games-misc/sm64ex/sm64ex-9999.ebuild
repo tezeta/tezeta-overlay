@@ -14,8 +14,8 @@ EGIT_BRANCH="nightly"
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+60fps +baserom-us baserom-eu baserom-jp debug +bettercamera extdata nodrawdistance +optionsmenu textsaves +texturefix abi_x86_64 abi_x86_32"
-REQUIRED_USE="^^ ( baserom-us baserom-eu baserom-jp ) || ( abi_x86_64 abi_x86_32 )"
+IUSE="+60fps +baserom-us baserom-eu baserom-jp debug +bettercamera extdata nodrawdistance +optionsmenu textsaves +texturefix"
+REQUIRED_USE="^^ ( baserom-us baserom-eu baserom-jp )"
 
 DEPEND=">=dev-lang/python-3.6
 	media-libs/libsdl2[X,alsa,joystick,opengl,sound,video]
@@ -42,7 +42,6 @@ src_prepare() {
 
 src_compile() {
 	emake VERSION=${ROM_VER} \
-		TARGET_BITS=$(usex abi_x86_64 64 32) \
 		DEBUG=$(usex debug 1 0) \
 		BETTERCAMERA=$(usex bettercamera 1 0) \
 		NODRAWINGDISTANCE=$(usex nodrawdistance 1 0) \
