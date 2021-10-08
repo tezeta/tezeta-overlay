@@ -1,150 +1,99 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-#note: tenacity claims to depend on 3.1-gtk3, but compiling with system wxwidgets is broken currently.
-#Only works with pg_overlay's wxGTK (not included)
-WX_GTK_VER="3.1-gtk3"
+PYTHON_COMPAT=(python3_{7,8,9,10})
+WX_GTK_VER=3.0-gtk3
 
-inherit cmake flag-o-matic wxwidgets xdg
+inherit cmake git-r3 flag-o-matic python-single-r1 wxwidgets xdg
 
 DESCRIPTION="an easy-to-use multi-track audio editor and recorder, forked from Audacity"
 HOMEPAGE="https://github.com/tenacityteam/tenacity"
 
-if [[ "${PV}" != 9999 ]] ; then
-	SRC_URI="https://github.com/tenacityteam/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
-			$SRC_URI"
-	S="${WORKDIR}/${P}"
-    KEYWORDS="~amd64 ~arm64 ~mips ~ppc ~ppc64 ~x86"
-else
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/tenacityteam/${PN}"
-	#git pulling nonexistant vcpkg submodule, filter it
-	EGIT_SUBMODULES=( '*' '-*vcpkg*' )
-	CMAKE_BUILD_TYPE="Release"
-fi
+EGIT_REPO_URI="https://github.com/tenacityteam/tenacity"
+#git pulling nonexistant vcpkg submodule, filter it
+EGIT_SUBMODULES=( '*' '-*vcpkg*' )
+CMAKE_BUILD_TYPE="Release"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~mips ppc ppc64 x86"
-IUSE="alsa doc ffmpeg +flac id3tag jack +ladspa +lv2 mad ogg oss sbsms
-	system-portmidi system-wxwidgets twolame vamp +vorbis +vst"
+KEYWORDS="~amd64 ~x86"
+IUSE="+midi id3tag mp3 ogg +vorbis +flac sbsms soundtouch ffmpeg +lv2 twolame +vst2 vamp"
 
-RESTRICT="test network-sandbox"
-
-RDEPEND="dev-libs/expat
+RDEPEND="
+	${PYTHON_DEPS}
+	virtual/opengl
+	sys-libs/zlib
+	dev-libs/expat
+	media-sound/lame
 	media-libs/libsndfile
-	media-libs/libsoundtouch
-	media-libs/portaudio[alsa?]
 	media-libs/soxr
-	>=media-sound/lame-3.100-r3
-	system-wxwidgets? ( x11-libs/wxGTK:3.1-gtk3[X] )
-	alsa? ( media-libs/alsa-lib )
-	ffmpeg? ( media-video/ffmpeg:= )
+	dev-db/sqlite:3
+	dev-libs/glib:2
+	x11-libs/gtk+:3
+	x11-libs/wxGTK:${WX_GTK_VER}
+	midi? (
+		media-libs/portmidi:=
+		media-libs/portsmf:=
+	)
+	id3tag? ( media-libs/libid3tag:= )
+	mp3? ( media-libs/libmad )
+	twolame? ( media-sound/twolame )
+	ogg? ( media-libs/libogg )
+	vorbis? ( media-libs/libvorbis )
 	flac? ( media-libs/flac[cxx] )
-	id3tag? ( media-libs/libid3tag )
-	jack? ( virtual/jack )
+	sbsms? ( media-libs/libsbsms )
+	soundtouch? ( media-libs/libsoundtouch )
+	ffmpeg? ( media-video/ffmpeg )
 	lv2? (
-		dev-libs/serd
-		dev-libs/sord
-		>=media-libs/lilv-0.24.6-r2
 		media-libs/lv2
-		media-libs/sratom
+		media-libs/lilv
 		media-libs/suil
 	)
-	mad? ( >=media-libs/libmad-0.15.1b )
-	ogg? ( media-libs/libogg )
-	system-portmidi? ( media-libs/portmidi )
-	sbsms? ( media-libs/libsbsms )
-	twolame? ( media-sound/twolame )
 	vamp? ( media-libs/vamp-plugin-sdk )
-	vorbis? ( media-libs/libvorbis )
+	vst2? ( x11-libs/gtk+:3[X] )
 "
-
-DEPEND="${RDEPEND}"
-BDEPEND="app-arch/unzip
+DEPEND="
+	${RDEPEND}
 	sys-devel/gettext
-	virtual/pkgconfig
-	dev-util/conan
+	app-text/scdoc
 "
 
 PATCHES=(
    	"${FILESDIR}/${P}-disable-ccache.patch"
 	"${FILESDIR}/${P}-fix-vertical-track-resizing.patch"
 	"${FILESDIR}/${P}-fix-gettimeofday.patch"
-	#"${FILESDIR}/${P}-about-dialog-fix-flag-checks.patch"
 )
 
 src_prepare() {
 	cmake_src_prepare
-
-	#MIDI_OUT depends on midi
-#	if ! use midi; then
-#		sed -i -e 's/^ *MIDI_OUT//g' src/Experimental.cmake || die
-#	fi
 }
 
 src_configure() {
-	#todo: fix issues finding system wxwidgets with conan
-	if use system-wxwidgets; then
-		die "Building Tenacity with system wxwidgets is currently broken, please remove the system-wxwidgets flag and try again."
-	fi
-	#use system-wxwidgets || setup-wxwidgets
+	setup-wxwidgets
 
 	append-cxxflags -std=gnu++14
 
-	# * always use system libraries if possible
-	# * options listed in the order that cmake-gui lists them
 	local mycmakeargs=(
-#		--disable-dynamic-loading
-		-Dlib_preference=system
-		-Duse_expat=system
-		-Duse_ffmpeg=$(usex ffmpeg loaded off)
-		-Duse_flac=$(usex flac system off)
-		-Duse_id3tag=$(usex id3tag system off)
-		-Duse_ladspa=$(usex ladspa)
-		-Duse_lame=system
-		-Duse_lv2=$(usex lv2 system off)
-		#fails to compile without midi, see https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255186
-		-Duse_libmad=$(usex mad system off)
-		-Duse_midi=$(usex system-portmidi system local)
-		-Duse_nyquist=local
-		-Duse_ogg=$(usex ogg system off)
-		-Duse_pa_alsa=$(usex alsa)
-		-Duse_pa_jack=$(usex jack linked off)
-		-Duse_pa_oss=$(usex oss)
-		#-Duse_pch leaving it to the default behavior
-		-Duse_portaudio=local # only 'local' option is present
-		-Duse_portsmf=local
-		-Duse_sbsms=$(usex sbsms local off) # no 'system' option in configuration?
-		-Duse_sndfile=system
-		-Duse_soundtouch=system
-		-Duse_soxr=system
-		-Duse_twolame=$(usex twolame system off)
-		-Duse_vamp=$(usex vamp system off)
-		-Duse_vorbis=$(usex vorbis system off)
-		-Duse_vst=$(usex vst)
-		-Duse_wxwidgets=$(usex system-wxwidgets system local)
+		-DBUILD_MANPAGE=ON
+		-DMIDI=$(usex midi)
+		-DID3TAG=$(usex id3tag)
+		-DMP3_DECODING=$(usex mp3)
+		-DMP2_ENCODING=$(usex twolame)
+		-DOGG=$(usex ogg)
+		-DVORBIS=$(usex vorbis)
+		-DFLAC=$(usex flac)
+		-DSBSMS=$(usex sbsms)
+		-DSOUNDTOUCH=$(usex soundtouch)
+		-DFFMPEG=$(usex ffmpeg)
+		-DVAMP=$(usex vamp)
+		-DLV2=$(usex lv2)
+		-DVST2=$(usex vst2)
 	)
 
 	cmake_src_configure
-
-	# if git is not installed, this (empty) file is not being created and the compilation fails
-	# so we create it manually
-	touch "${BUILD_DIR}/src/private/RevisionIdent.h" || die "failed to create file"
-
 }
 
 src_install() {
 	cmake_src_install
-
-	# Remove bad doc install
-	rm -r "${ED}"/usr/share/doc || die
-
-	if use doc ; then
-		docinto html
-		dodoc -r "${WORKDIR}"/help/manual/{m,man,manual}
-		dodoc "${WORKDIR}"/help/manual/{favicon.ico,index.html,quick_help.html}
-		dosym ../../doc/${PF}/html /usr/share/${PN}/help/manual
-	fi
 }
