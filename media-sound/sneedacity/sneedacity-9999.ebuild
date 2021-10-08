@@ -4,9 +4,10 @@
 EAPI=7
 #note: sneedacity claims to depend on 3.1-gtk3, but compiling with system wxwidgets is broken currently.
 #Only works with pg_overlay's wxGTK (not included)
-WX_GTK_VER="3.1-gtk3"
+#WX_GTK_VER="3.1-gtk3"
 
-inherit cmake flag-o-matic wxwidgets xdg
+inherit cmake flag-o-matic xdg
+#inherit wxwidgets
 
 DESCRIPTION="Free crossplatform audio editor (formerly Audacity)"
 HOMEPAGE="https://github.com/Sneeds-Feed-and-Seed/sneedacity"
