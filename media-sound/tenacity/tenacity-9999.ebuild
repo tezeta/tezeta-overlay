@@ -19,14 +19,16 @@ if [[ "${PV}" != 9999 ]] ; then
 else
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/tenacityteam/${PN}"
+	#git pulling nonexistant vcpkg submodule, filter it
+	EGIT_SUBMODULES=( '*' '-*vcpkg*' )
 	CMAKE_BUILD_TYPE="Release"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~mips ppc ppc64 x86"
-IUSE="alsa doc ffmpeg +flac id3tag jack +ladspa +lv2 mad ogg oss +portmixer
-	sbsms system-portmidi system-wxwidgets twolame vamp +vorbis +vst"
+IUSE="alsa doc ffmpeg +flac id3tag jack +ladspa +lv2 mad ogg oss sbsms
+	system-portmidi system-wxwidgets twolame vamp +vorbis +vst"
 
 RESTRICT="test network-sandbox"
 
@@ -67,11 +69,10 @@ BDEPEND="app-arch/unzip
 "
 
 PATCHES=(
-   	#"${FILESDIR}/${P}-disable-ccache.patch"
+   	"${FILESDIR}/${P}-disable-ccache.patch"
 	"${FILESDIR}/${P}-fix-vertical-track-resizing.patch"
 	"${FILESDIR}/${P}-fix-gettimeofday.patch"
-	"${FILESDIR}/${P}-add-missing-include-portaudio.patch"
-	"${FILESDIR}/${P}-about-dialog-fix-flag-checks.patch"
+	#"${FILESDIR}/${P}-about-dialog-fix-flag-checks.patch"
 )
 
 src_prepare() {
@@ -114,7 +115,6 @@ src_configure() {
 		-Duse_pa_oss=$(usex oss)
 		#-Duse_pch leaving it to the default behavior
 		-Duse_portaudio=local # only 'local' option is present
-		-Duse_portmixer=$(usex portmixer local off)
 		-Duse_portsmf=local
 		-Duse_sbsms=$(usex sbsms local off) # no 'system' option in configuration?
 		-Duse_sndfile=system
