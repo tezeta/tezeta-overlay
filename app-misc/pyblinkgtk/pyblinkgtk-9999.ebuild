@@ -30,5 +30,4 @@ src_prepare() {
 
 src_install() {
 	python_doscript ${PN}
-	doicon ${S}/blinkstick.ico
 }
