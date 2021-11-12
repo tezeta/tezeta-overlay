@@ -14,7 +14,7 @@ KEYWORDS="amd64 x86"
 
 RDEPEND="x11-libs/libX11
 	x11-libs/libXext
-	x11-libs/libXpmi
+	x11-libs/libXpm
 	>=sys-power/nut-2.2.1"
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto
