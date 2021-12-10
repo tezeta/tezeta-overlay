@@ -10,10 +10,10 @@ SRC_URI="https://mirrors.slackware.com/slackware/slackware-14.2/source/xap/xgame
 
 LICENSE="xlander"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="x86 amd64"
 IUSE=""
 
-DEPEND="virtual/x11"
+DEPEND="x11-base/xorg-server"
 
 S=${WORKDIR}/${PN}
 
