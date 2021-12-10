@@ -1,0 +1,32 @@
+diff --color -Naur xlander.orig/Makefile xlander/Makefile
+--- xlander.orig/Makefile	1969-12-31 19:00:00.000000000 -0500
++++ xlander/Makefile	2021-12-09 20:26:11.587930840 -0500
+@@ -0,0 +1,28 @@
++#CC = gcc -Wall
++CC = cc
++#CFLAGS = -O
++#INCLUDES = -I/usr/local/include
++#LDFLAGS = -s -L/usr/local/lib
++LIBS = -lm -lX11
++TARGET = xlander
++SRCS = xlander.c globals.c initialize.c functions.c instrument.c game.c \
++	resource.c
++OBJS = xlander.o globals.o initialize.o functions.o instrument.o game.o \
++	resource.o
++ALL = README Imakefile Makefile.std xlander.man $(SRCS) xlander.h globals.h \
++	patchlevel.h
++
++all:	$(TARGET)
++
++$(TARGET):	$(OBJS)
++	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
++
++.c.o:
++	$(CC) $(CFLAGS) $(INCLUDES) -c $*.c
++
++clean:
++	rm -f $(OBJS) $(TARGET) core
++
++shar:	$(ALL)
++	shar -o $(TARGET).shar $(ALL)
++
