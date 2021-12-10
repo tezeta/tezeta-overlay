@@ -20,10 +20,6 @@ DEPEND="${RDEPEND}
 	x11-base/xorg-proto
 	x11-apps/xrandr"
 
-PATCHES=(
-	"${FILESDIR}"/wmnut-gcc-10-common.patch
-)
-
 src_prepare() {
 	default
 	eautoreconf
