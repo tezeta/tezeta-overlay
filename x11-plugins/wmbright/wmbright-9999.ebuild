@@ -25,5 +25,5 @@ PATCHES=(
 
 src_install() {
 	dobin wmbright
-	dodoc {sample.wmbrightrc,README}
+	dodoc {sample.wmbrightrc,README.md}
 }
