@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/maurerpe/xfce4-wmdock-plugin"
 EGIT_REPO_URI="https://github.com/maurerpe/xfce4-wmdock-plugin"
 
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="3"
 KEYWORDS="amd64 x86"
 IUSE=""
 
@@ -19,7 +19,8 @@ RDEPEND="x11-libs/gtk+:3
 	>=xfce-base/libxfce4ui-4.14
 	>=xfce-base/libxfce4util-4.14
 	>=xfce-base/xfce4-panel-4.14
-	x11-libs/libX11"
+	x11-libs/libX11
+	!xfce-extra/xfce4-wmdock-plugin-gtk3"
 DEPEND="${RDEPEND}
 	dev-util/intltool
 	sys-devel/gettext

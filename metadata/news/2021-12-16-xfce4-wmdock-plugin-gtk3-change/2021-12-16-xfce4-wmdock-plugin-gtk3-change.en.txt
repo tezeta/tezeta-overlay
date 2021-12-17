@@ -1,0 +1,19 @@
+Title: xfce-extra/xfce4-wmdock-plugin-gtk3 changes 
+Author: tezeta <jejfarmer@gmail.com>
+Content-Type: text/plain
+Posted: 2021-12-16
+Revision: 1
+News-Item-Format: 2.0
+Display-If-Installed: xfce-extra/xfce4-wmdock-plugin-gtk3
+
+The old xfce4-wmdock-plugin, which depended on GTK+2, has been dropped due to
+all GTK+2 dependencies being removed from Xfce 4.16. xfce4-wmdock-plugin-gtk3 is
+moved to xfce4-wmdock-plugin:3.
+
+To solve this, deselect xfce4-wmdock-plugin-gtk3 and install
+xfce4-wmdock-plugin:
+
+emerge --deselect xfce4-wmdock-plugin-gtk3
+emerge xfce4-wmdock-plugin
+
+tezeta
