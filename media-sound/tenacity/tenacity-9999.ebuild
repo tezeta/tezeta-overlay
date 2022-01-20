@@ -32,8 +32,8 @@ RDEPEND="
 	dev-libs/glib:2
 	x11-libs/gtk+:3
 	x11-libs/wxGTK:${WX_GTK_VER}
+	media-libs/portaudio
 	midi? (
-		media-libs/portaudio
 		media-libs/portmidi:=
 		media-libs/portsmf:=
 	)
