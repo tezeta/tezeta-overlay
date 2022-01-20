@@ -1,0 +1,22 @@
+diff --color -Naur system-config-lvm-9999-orig/Makefile.am system-config-lvm-9999/Makefile.am
+--- system-config-lvm-9999-orig/Makefile.am	2022-01-19 19:14:21.737542844 -0500
++++ system-config-lvm-9999/Makefile.am	2022-01-19 19:14:33.994542077 -0500
+@@ -43,7 +43,6 @@
+ #	$(INSTALL_DATA) $(srcdir)/src/pixmaps/PV.xpm $(DESTDIR)$(pkgdatadir)
+ #	$(INSTALL_DATA) $(srcdir)/src/pixmaps/VG.xpm $(DESTDIR)$(pkgdatadir)
+ #	$(INSTALL_DATA) $(srcdir)/src/pixmaps/grad3.xpm $(DESTDIR)$(pkgdatadir)
+-	ln -fs consolehelper $(DESTDIR)$(prefix)/bin/system-config-lvm
+ 
+ uninstall-local:
+ 	rm -f $(DESTDIR)$(sysconfdir)/pam.d/system-config-lvm
+diff --color -Naur system-config-lvm-9999-orig/Makefile.in system-config-lvm-9999/Makefile.in
+--- system-config-lvm-9999-orig/Makefile.in	2022-01-19 19:14:21.740542844 -0500
++++ system-config-lvm-9999/Makefile.in	2022-01-19 19:14:29.544542356 -0500
+@@ -864,7 +864,6 @@
+ #	$(INSTALL_DATA) $(srcdir)/src/pixmaps/PV.xpm $(DESTDIR)$(pkgdatadir)
+ #	$(INSTALL_DATA) $(srcdir)/src/pixmaps/VG.xpm $(DESTDIR)$(pkgdatadir)
+ #	$(INSTALL_DATA) $(srcdir)/src/pixmaps/grad3.xpm $(DESTDIR)$(pkgdatadir)
+-	ln -fs consolehelper $(DESTDIR)$(prefix)/bin/system-config-lvm
+ 
+ uninstall-local:
+ 	rm -f $(DESTDIR)$(sysconfdir)/pam.d/system-config-lvm
