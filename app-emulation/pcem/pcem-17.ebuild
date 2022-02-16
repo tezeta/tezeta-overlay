@@ -74,4 +74,6 @@ pkg_postinst() {
 	elog ""
 	elog "To install globally, put your ROM files into '${ROOT}/usr/share/pcem/roms/<system>'."
 	elog "To install locally, put your ROM files into '~/.pcem/roms/<system>'."
+	elog ""
+	elog "Additionally, you can emerge app-emulation/pcem-roms from tezeta-overlay."
 }

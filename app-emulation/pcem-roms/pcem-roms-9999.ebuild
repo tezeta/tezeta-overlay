@@ -1,13 +1,13 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-DESCRIPTION="A collection of required ROMs files for PCem emulator"
+DESCRIPTION="A collection of required ROM files for PCem"
 HOMEPAGE="https://github.com/BaRRaKudaRain/PCem-ROMs"
 if [[ ${PV} == 9999 ]]; then
-    inherit git-r3
-    EGIT_REPO_URI="https://github.com/BaRRaKudaRain/PCem-ROMs.git"
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/BaRRaKudaRain/PCem-ROMs.git"
 else
 	KEYWORDS="amd64"
 	SRC_URI="https://github.com/BaRRaKudaRain/PCem-ROMs/archive/refs/tags/v${PV}.0.zip"
