@@ -6,8 +6,8 @@ EAPI=8
 inherit git-r3 meson
 
 DESCRIPTION="A GTK patchbay for pipewire"
-HOMEPAGE="https://gitlab.freedesktop.org/ryuukyu/helvum"
-EGIT_REPO_URI="https://gitlab.freedesktop.org/ryuukyu/helvum.git"
+HOMEPAGE="https://gitlab.freedesktop.org/pipewire/helvum"
+EGIT_REPO_URI="https://gitlab.freedesktop.org/pipewire/helvum.git"
 
 LICENSE="GPL-3"
 SLOT="0"
