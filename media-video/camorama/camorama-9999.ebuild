@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools git-r3 xdg-utils
+inherit autotools git-r3 gnome2-utils xdg-utils
 
 DESCRIPTION="A webcam application featuring various image filters"
 HOMEPAGE="https://github.com/alessio/camorama"
@@ -32,9 +32,11 @@ src_configure() {
 }
 
 pkg_postinst() {
+	gnome2_schemas_update
 	xdg_icon_cache_update
 }
 
 pkg_postrm() {
+	gnome2_schemas_update
 	xdg_icon_cache_update
 }
