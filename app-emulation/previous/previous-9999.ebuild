@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -26,7 +26,7 @@ DEPEND="media-libs/libsdl2[X,opengl,sound,video]
 	)
 "
 RDEPEND="${DEPEND}"
-BDEPEND=""
+BDEPEND="app-arch/unzip"
 
 DOCS=()
 
@@ -46,6 +46,9 @@ src_configure() {
 	fi
 
 	#todo: use CMake directly for build instead of configure script
+	#currently the included CMakeLists for Previous installs assets in
+	#undesirable places, i.e. ROM files in /usr/bin, icon in /usr/share/previous.
+	#a bigger concern is issues with soname deps
 	./configure \
 		--prefix=/usr \
 		${debugarg}
@@ -63,13 +66,10 @@ src_install() {
 	dodoc readme.previous.txt networking.howto.txt filesharing.howto.txt
 
 	unzip -q "${FILESDIR}"/PReV-icons-WOshad.zip
-	cd ./HighResOSX-WOshadow.iconset
+	for i in 16 32 128 256 512 ; do
+		newicon -s "${i}" ./HighResOSX-WOshadow.iconset/icon_"${i}x${i}".png previous-app.png
+	done
 
-	newicon -s 16 icon_16x16.png previous-app.png
-	newicon -s 32 icon_32x32.png previous-app.png
-	newicon -s 128 icon_128x128.png previous-app.png
-	newicon -s 256 icon_256x256.png previous-app.png
-	newicon -s 512 icon_512x512.png previous-app.png
 	domenu "${FILESDIR}"/previous.desktop
 }
 
