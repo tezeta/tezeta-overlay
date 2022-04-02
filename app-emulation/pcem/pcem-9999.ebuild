@@ -34,7 +34,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-PATCHES=( "${FILESDIR}/${P}-plugin-api-respect-libdir.patch" )
+PATCHES=( )
 
 src_prepare() {
 	cmake_src_prepare
@@ -69,6 +69,8 @@ src_configure() {
 
 		#Experimental debug options
 		-DPCEM_PRINTER_DEBUG=${EXPDEBUG}
+
+		-DPCEM_LIB_DIR=/usr/$(get_libdir)
 	)
 
 	cmake_src_configure
