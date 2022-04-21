@@ -1,0 +1,11 @@
+diff --color -Naur dexdrive-9999-orig/dexdrive.c dexdrive-9999/dexdrive.c
+--- dexdrive-9999-orig/dexdrive.c	2022-04-21 04:23:57.616194026 -0400
++++ dexdrive-9999/dexdrive.c	2022-04-21 04:24:08.054192778 -0400
+@@ -114,7 +114,6 @@
+ 	printk(KERN_WARNING DEX_NAME ": " msg "\n" , ## args)
+ 
+ #define PDEBUG(msg, args...) \
+-	printk(KERN_DEBUG DEX_NAME ": " msg "\n" , ## args)
+ 
+ 
+ /* Data associated with each device */
