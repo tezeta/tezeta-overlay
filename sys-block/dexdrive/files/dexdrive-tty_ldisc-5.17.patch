@@ -1,0 +1,20 @@
+diff --color -Naur dexdrive-9999-orig/dexdrive.c dexdrive-9999/dexdrive.c
+--- dexdrive-9999-orig/dexdrive.c	2022-04-21 03:37:34.906526631 -0400
++++ dexdrive-9999/dexdrive.c	2022-04-21 03:39:11.103515134 -0400
+@@ -1230,14 +1230,14 @@
+ }
+ 
+ /* Called by the tty driver upon ioctl() */
+-static int dex_tty_ioctl(struct tty_struct *tty, struct file *file,
++static int dex_tty_ioctl(struct tty_struct *tty,
+ 				unsigned int cmd, unsigned long arg)
+ {
+ 	struct dex_device *dex = tty->disc_data;
+ 	unsigned long flags;
+ 	int ret;
+ 
+-	PDEBUG("> dex_tty_ioctl(%p, %p, 0x%8x, %lu)", tty, file, cmd, arg);
++	PDEBUG("> dex_tty_ioctl(%p, %p, 0x%8x, %lu)", tty, cmd, arg);
+ 
+ 	spin_lock_irqsave(&dex->lock, flags);
+ 

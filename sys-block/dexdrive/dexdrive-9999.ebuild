@@ -24,6 +24,8 @@ RDEPEND="${DEPEND}"
 
 MODULE_NAMES="dexdrive(misc)"
 
+PATCHES=( "${FILESDIR}/${PN}-tty_ldisc-5.17.patch" )
+
 pkg_setup() {
 	linux-mod_pkg_setup
 
