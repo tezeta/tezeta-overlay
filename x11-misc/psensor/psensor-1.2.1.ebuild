@@ -11,7 +11,7 @@ if [[ ${PV} == 9999 ]]; then
     inherit git-r3
     EGIT_REPO_URI="https://gitlab.com/jeanfi/psensor.git"
 else
-    KEYWORDS="amd64"
+    KEYWORDS="~amd64 ~x86"
 	SRC_URI="https://wpitchoune.net/psensor/files/${P}.tar.gz"
 	PATCHES=( "${FILESDIR}"/psensor-fix-gcc-ident.patch 
 		"${FILESDIR}"/psensor-server-enum.patch )
@@ -22,7 +22,7 @@ SLOT="0"
 IUSE="+disks +gtop"
 
 RDEPEND="
-	disks? ( dev-libs/atasmart
+	disks? ( dev-libs/libatasmart
 			sys-fs/udisks:2 )
 	gtop? ( gnome-base/libgtop )
 	>=sys-apps/lm-sensors-3
