@@ -1,0 +1,13 @@
+diff --git a/src/lib/pudisks2.c b/src/lib/pudisks2.c
+index 7111174d06d41956805b6e45c9374a9610cecb65..987dac40f920e44d25fb4851e6ae642db917b381 100644
+--- a/src/lib/pudisks2.c
++++ b/src/lib/pudisks2.c
+@@ -83,7 +83,7 @@ static void smart_update(struct psensor *s, UDisksDriveAta *ata)
+ 			PROVIDER_NAME,
+ 			data->path);
+ 
+-		data->last_smart_update = t;
++	data->last_smart_update = t;
+ }
+ 
+ void udisks2_psensor_list_update(struct psensor **sensors)
