@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=7
 
 inherit eutils
 
@@ -24,10 +24,13 @@ RDEPEND="${DEPEND}"
 MY_PV="3.4"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
+PATCHES=(
+	"${FILESDIR}/${P}-shebang.patch"
+	"${FILESDIR}/${P}-fix-broken-links.patch"
+)
+
 src_prepare() {
-	epatch "${FILESDIR}/${P}-shebang.patch"
-	epatch "${FILESDIR}/${P}-fix-broken-links.patch"
-	epatch_user
+	default
 }
 
 src_install() {
