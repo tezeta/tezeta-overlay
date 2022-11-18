@@ -1,27 +1,96 @@
---- a/src/configuration.c
-+++ b/src/configuration.c
-@@ -451,12 +451,9 @@
- 	ConfigureParams.Sound.bEnableSound = true;
- 
+diff --color -Naur previous-9999-orig/src/configuration.c previous-9999/src/configuration.c
+--- previous-9999-orig/src/configuration.c	2022-11-18 10:59:02.336276825 -0500
++++ previous-9999/src/configuration.c	2022-11-18 11:02:07.845087824 -0500
+@@ -473,13 +473,13 @@
  	/* Set defaults for Rom */
--    sprintf(ConfigureParams.Rom.szRom030FileName, "%s%cRev_1.0_v41.BIN",
--            Paths_GetWorkingDir(), PATHSEP);
--    sprintf(ConfigureParams.Rom.szRom040FileName, "%s%cRev_2.5_v66.BIN",
--            Paths_GetWorkingDir(), PATHSEP);
--    sprintf(ConfigureParams.Rom.szRomTurboFileName, "%s%cRev_3.3_v74.BIN",
--            Paths_GetWorkingDir(), PATHSEP);
-+    sprintf(ConfigureParams.Rom.szRom030FileName, "/usr/share/previous/Rev_1.0_v41.BIN");
-+    sprintf(ConfigureParams.Rom.szRom040FileName, "/usr/share/previous/Rev_2.5_v66.BIN");
-+    sprintf(ConfigureParams.Rom.szRomTurboFileName, "/usr/share/previous/Rev_3.3_v74.BIN");
-     
-     ConfigureParams.Rom.bUseCustomMac = false;
-     memset(ConfigureParams.Rom.nRomCustomMac, 0,
-@@ -492,7 +489,7 @@
-         ConfigureParams.Dimension.board[i].nMemoryBankSize[1] = 4;
-         ConfigureParams.Dimension.board[i].nMemoryBankSize[2] = 4;
-         ConfigureParams.Dimension.board[i].nMemoryBankSize[3] = 4;
--        sprintf(ConfigureParams.Dimension.board[i].szRomFileName, "%s%cdimension_eeprom.bin",
-+        sprintf(ConfigureParams.Dimension.board[i].szRomFileName, "/usr/share/previous/dimension_eeprom.bin",
-                 Paths_GetWorkingDir(), PATHSEP);
-     }
+ 	File_MakePathBuf(ConfigureParams.Rom.szRom030FileName,
+ 					 sizeof(ConfigureParams.Rom.szRom030FileName),
+-					 psWorkingDir, "Rev_1.0_v41", "BIN");
++					 "/usr/share/previous", "Rev_1.0_v41", "BIN");
+ 	File_MakePathBuf(ConfigureParams.Rom.szRom040FileName,
+ 					 sizeof(ConfigureParams.Rom.szRom040FileName),
+-					 psWorkingDir, "Rev_2.5_v66", "BIN");
++					 "/usr/share/previous", "Rev_2.5_v66", "BIN");
+ 	File_MakePathBuf(ConfigureParams.Rom.szRomTurboFileName,
+ 					 sizeof(ConfigureParams.Rom.szRomTurboFileName),
+-					 psWorkingDir, "Rev_3.3_v74", "BIN");
++					 "/usr/share/previous", "Rev_3.3_v74", "BIN");
  
+ 	ConfigureParams.Rom.bUseCustomMac = false;
+ 	memset(ConfigureParams.Rom.nRomCustomMac, 0,
+@@ -517,7 +517,7 @@
+ 		ConfigureParams.Dimension.board[i].nMemoryBankSize[3] = 4;
+ 		File_MakePathBuf(ConfigureParams.Dimension.board[i].szRomFileName,
+ 						 sizeof(ConfigureParams.Dimension.board[i].szRomFileName),
+-						 psWorkingDir, "dimension_eeprom", "bin");
++						 "/usr/share/previous", "dimension_eeprom", "bin");
+ 	}
+ 
+ 	/* Initialize the configuration file name */
+diff --color -Naur previous-9999-orig/src/dialog.c previous-9999/src/dialog.c
+--- previous-9999-orig/src/dialog.c	2022-11-18 10:59:02.336276825 -0500
++++ previous-9999/src/dialog.c	2022-11-18 11:01:38.057261471 -0500
+@@ -94,7 +94,7 @@
+         case NEXT_CUBE030:
+             szMissingFile = ConfigureParams.Rom.szRom030FileName;
+             snprintf(szMachine, sizeof(szMachine), "NeXT Computer");
+-            snprintf(szDefault, sizeof(szDefault), "%s%cRev_1.0_v41.BIN", Paths_GetWorkingDir(), PATHSEP);
++            snprintf(szDefault, sizeof(szDefault), "%s%cRev_1.0_v41.BIN", "/usr/share/previous", PATHSEP);
+             break;
+         case NEXT_CUBE040:
+         case NEXT_STATION:
+@@ -103,13 +103,13 @@
+                 snprintf(szMachine, sizeof(szMachine), "%s Turbo %s",
+                          (ConfigureParams.System.nMachineType==NEXT_CUBE040)?"NeXTcube":"NeXTstation",
+                          (ConfigureParams.System.bColor)?"Color":"");
+-                snprintf(szDefault, sizeof(szDefault), "%s%cRev_3.3_v74.BIN", Paths_GetWorkingDir(), PATHSEP);
++                snprintf(szDefault, sizeof(szDefault), "%s%cRev_3.3_v74.BIN", "/usr/share/previous", PATHSEP);
+             } else {
+                 szMissingFile = ConfigureParams.Rom.szRom040FileName;
+                 snprintf(szMachine, sizeof(szMachine), "%s %s",
+                          (ConfigureParams.System.nMachineType==NEXT_CUBE040)?"NeXTcube":"NeXTstation",
+                          (ConfigureParams.System.bColor)?"Color":"");
+-                snprintf(szDefault, sizeof(szDefault), "%s%cRev_2.5_v66.BIN", Paths_GetWorkingDir(), PATHSEP);
++                snprintf(szDefault, sizeof(szDefault), "%s%cRev_2.5_v66.BIN", "/usr/share/previous", PATHSEP);
+             }
+             break;
+             
+@@ -127,7 +127,7 @@
+     for (i = 0; i < ND_MAX_BOARDS; i++) {
+         while (ConfigureParams.Dimension.board[i].bEnabled && !File_Exists(ConfigureParams.Dimension.board[i].szRomFileName)) {
+             snprintf(szMachine, sizeof(szMachine), "NeXTdimension at slot %i", i*2+2);
+-            snprintf(szDefault, sizeof(szDefault), "%s%cdimension_eeprom.bin", Paths_GetWorkingDir(), PATHSEP);
++            snprintf(szDefault, sizeof(szDefault), "%s%cdimension_eeprom.bin", "/usr/share/previous", PATHSEP);
+             DlgMissing_Rom(szMachine, ConfigureParams.Dimension.board[i].szRomFileName,
+                            szDefault, &ConfigureParams.Dimension.board[i].bEnabled);
+             if (bQuitProgram) {
+diff --color -Naur previous-9999-orig/src/gui-sdl/dlgRom.c previous-9999/src/gui-sdl/dlgRom.c
+--- previous-9999-orig/src/gui-sdl/dlgRom.c	2022-11-18 10:59:02.324276826 -0500
++++ previous-9999/src/gui-sdl/dlgRom.c	2022-11-18 10:59:10.984275972 -0500
+@@ -90,7 +90,7 @@
+ 			case DLGROM_ROM030_DEFAULT:
+ 				File_MakePathBuf(ConfigureParams.Rom.szRom030FileName,
+ 								 sizeof(ConfigureParams.Rom.szRom030FileName),
+-								 Paths_GetWorkingDir(), "Rev_1.0_v41", "BIN");
++								 "/usr/share/previous", "Rev_1.0_v41", "BIN");
+ 				File_ShrinkName(szDlgRom030Name, ConfigureParams.Rom.szRom030FileName, sizeof(szDlgRom030Name)-1);
+ 				break;
+ 				
+@@ -105,7 +105,7 @@
+ 			case DLGROM_ROM040_DEFAULT:
+ 				File_MakePathBuf(ConfigureParams.Rom.szRom040FileName,
+ 								 sizeof(ConfigureParams.Rom.szRom040FileName),
+-								 Paths_GetWorkingDir(), "Rev_2.5_v66", "BIN");
++								 "/usr/share/previous", "Rev_2.5_v66", "BIN");
+ 				File_ShrinkName(szDlgRom040Name, ConfigureParams.Rom.szRom040FileName, sizeof(szDlgRom040Name)-1);
+ 				break;
+ 				
+@@ -120,7 +120,7 @@
+ 			case DLGROM_ROMTURBO_DEFAULT:
+ 				File_MakePathBuf(ConfigureParams.Rom.szRomTurboFileName,
+ 								 sizeof(ConfigureParams.Rom.szRomTurboFileName),
+-								 Paths_GetWorkingDir(), "Rev_3.3_v74", "BIN");
++								 "/usr/share/previous", "Rev_3.3_v74", "BIN");
+ 				File_ShrinkName(szDlgRomTurboName, ConfigureParams.Rom.szRomTurboFileName, sizeof(szDlgRomTurboName)-1);
+ 				break;
+ 				
