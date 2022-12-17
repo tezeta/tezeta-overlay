@@ -58,7 +58,8 @@ src_install() {
 	newbin ./src/Previous previous
 
 	insinto /usr/share/previous
-	doins ./src/ND_step1_v43_eeprom.bin
+	doins ./src/ND_step1_v43.BIN
+	doins ./src/Rev_0.8_v31.BIN
 	doins ./src/Rev_1.0_v41.BIN
 	doins ./src/Rev_2.5_v66.BIN
 	doins ./src/Rev_3.3_v74.BIN
