@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=7
+EAPI=8
 
-inherit desktop eutils git-r3 xdg
+inherit desktop git-r3 xdg
 
 DESCRIPTION="Super Mario 64 PC port with additional features"
 HOMEPAGE="https://github.com/sm64pc/sm64ex"
