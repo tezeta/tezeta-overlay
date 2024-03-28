@@ -17,7 +17,9 @@ KEYWORDS="amd64 x86"
 IUSE=""
 
 RDEPEND="x11-libs/gtk+:3[introspection]
-		dev-python/pygobject:3
+		$(python_gen_cond_dep '
+			dev-python/pygobject[${PYTHON_USEDEP}]
+		')
 		${PYTHON_DEPS}"
 
 DEPEND=""
