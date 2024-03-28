@@ -15,8 +15,8 @@ KEYWORDS="~amd64 ~x86"
 RESTRICT="network-sandbox"
 
 DEPEND=">=media-video/pipewire-0.3
-		>=gui-libs/gtk-4.4.0"
+		>=gui-libs/gtk-4.12.2"
 RDEPEND="${DEPEND}"
 BDEPEND=">=sys-devel/clang-3.7
-		dev-util/meson
+		dev-build/meson
 		virtual/rust"
