@@ -11,10 +11,16 @@ HOMEPAGE="https://github.com/sm64pc/sm64ex"
 EGIT_REPO_URI="https://github.com/sm64pc/sm64ex.git"
 EGIT_BRANCH="nightly"
 
+SRC_URI="
+	baserom-us? ( baserom.us.z64 )
+	baserom-eu? ( baserom.eu.z64 )
+	baserom-jp? ( baserom.jp.z64 )
+"
+
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+60fps +baserom-us baserom-eu baserom-jp debug +bettercamera extdata nodrawdistance +optionsmenu textsaves +texturefix"
+IUSE="+60fps +baserom-us baserom-eu baserom-jp debug discord-presence +bettercamera extdata nodrawdistance +optionsmenu textsaves +texturefix"
 REQUIRED_USE="^^ ( baserom-us baserom-eu baserom-jp )"
 
 DEPEND=">=dev-lang/python-3.6
@@ -23,19 +29,24 @@ DEPEND=">=dev-lang/python-3.6
 	media-libs/audiofile"
 RDEPEND="$DEPEND"
 
+RESTRICT="fetch"
+
+pkg_nofetch() {
+	einfo "Please provide your own rom"
+	einfo "    - ${A}"
+}
+
+src_unpack() {
+	git-r3_src_unpack
+	cp "${DISTDIR}/${A}" ${S}
+}
+
 src_prepare() {
 	default
 
 	use baserom-us && ROM_VER="us"
 	use baserom-eu && ROM_VER="eu"
 	use baserom-jp && ROM_VER="jp"
-
-	einfo "Attempting to copy Super Mario 64 ROM file from distfiles..."
-	if [ ! -f /usr/portage/distfiles/baserom.${ROM_VER}.z64 ]; then
-		die "Please rename and copy your Super Mario 64 ROM file to /usr/portage/distfiles/baserom.${ROM_VER}.z64"
-	fi
-
-	cp -v /usr/portage/distfiles/baserom.${ROM_VER}.z64 ${S}
 
 	use 60fps && eapply -p1 "${S}/enhancements/60fps_ex.patch"
 }
@@ -49,17 +60,13 @@ src_compile() {
 		EXT_OPTIONS_MENU=$(usex optionsmenu 1 0) \
 		EXTERNAL_DATA=$(usex extdata 1 0) \
 		TEXTSAVES=$(usex textsaves 1 0) \
+		DISCORDRPC=$(useex discord-presence 1 0) \
 		|| die "Error: emake failed!"
 }
 
 src_install() {
-	insinto /usr/share/${PN}
-	doins -r ./build/${ROM_VER}_pc/*
-
-	fperms +x /usr/share/${PN}/sm64.${ROM_VER}.f3dex2e
-	dosym /usr/share/${PN}/sm64.${ROM_VER}.f3dex2e /usr/bin/sm64ex
-
 	dodoc "README.md"
+	newbin build/${ROM_VER}_pc/sm64.${ROM_VER}.f3dex2e sm64ex
 
 	doicon -s scalable ${FILESDIR}/sm64ex.svg
 	domenu ${FILESDIR}/sm64ex.desktop
