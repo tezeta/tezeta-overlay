@@ -60,7 +60,7 @@ src_compile() {
 		EXT_OPTIONS_MENU=$(usex optionsmenu 1 0) \
 		EXTERNAL_DATA=$(usex extdata 1 0) \
 		TEXTSAVES=$(usex textsaves 1 0) \
-		DISCORDRPC=$(useex discord-presence 1 0) \
+		DISCORDRPC=$(usex discord-presence 1 0) \
 		|| die "Error: emake failed!"
 }
 
