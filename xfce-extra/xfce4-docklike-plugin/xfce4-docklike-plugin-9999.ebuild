@@ -1,13 +1,13 @@
-# Copyright 1999-2021 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit autotools xdg-utils git-r3
 
 DESCRIPTION="A modern, docklike, minimalist taskbar for XFCE"
-HOMEPAGE="https://github.com/nsz32/docklike-plugin"
-EGIT_REPO_URI="https://github.com/nsz32/docklike-plugin.git"
+HOMEPAGE="https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin"
+EGIT_REPO_URI="https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin.git"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -19,6 +19,7 @@ RDEPEND="x11-libs/gtk+:3
 	>=x11-libs/cairo-1.16
 	>=xfce-base/libxfce4ui-4.14
 	>=xfce-base/xfce4-panel-4.14
+	>=xfce-base/libxfce4windowing-4.19.3
 	x11-libs/libX11"
 DEPEND="${RDEPEND}
 	dev-util/intltool
