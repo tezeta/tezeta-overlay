@@ -1,2 +1,4 @@
 amd64 hardened-desktop dev
 amd64 hardened-plasma-desktop dev
+amd64 hardened-desktop-split-usr dev
+amd64 hardened-plasma-desktop-split-usr dev
